@@ -2,6 +2,7 @@ package com.tallpeople.keeptalking;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.MouseCaptureMode;
@@ -10,6 +11,7 @@ import com.googlecode.lanterna.terminal.swing.TerminalEmulatorDeviceConfiguratio
 
 import java.awt.*;
 import java.io.IOException;
+import java.security.Key;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -30,6 +32,9 @@ public class Engine implements Runnable{
     private TerminalSize terminalSize;
     private long waitTime;
 
+    private KeyType keyPressed = null;
+    private String charPressed = null;
+
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> task;
@@ -42,7 +47,7 @@ public class Engine implements Runnable{
     public void initialize() throws IOException {
 
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
-        terminalFactory.setInitialTerminalSize(new TerminalSize(100, 40));
+        terminalFactory.setInitialTerminalSize(new TerminalSize(200, 54));
         //terminalFactory.setTerminalEmulatorTitle(title);
         terminalFactory.setTerminalEmulatorDeviceConfiguration(new TerminalEmulatorDeviceConfiguration().withCursorStyle(TerminalEmulatorDeviceConfiguration.CursorStyle.VERTICAL_BAR));
         terminalFactory.setMouseCaptureMode(MouseCaptureMode.CLICK_RELEASE_DRAG_MOVE);
@@ -89,8 +94,22 @@ public class Engine implements Runnable{
 
         screen.doResizeIfNecessary();
 
-        KeyStroke keystroke = screen.pollInput();
-
+        KeyStroke keyStroke = null;
+        while((keyStroke = screen.pollInput()) != null) {
+            //KeyStroke keyStroke = screen.pollInput();
+            if (keyStroke == null) {
+                if (keyStroke.getKeyType() == KeyType.Character) {
+                    keyPressed = null;
+                    charPressed = keyStroke.getCharacter().toString();
+                } else {
+                    charPressed = null;
+                    keyPressed = keyStroke.getKeyType();
+                }
+            } else {
+                keyPressed = null;
+                charPressed = null;
+            }
+        }
         game.update(this, screen);
         screen.refresh();
 
@@ -114,5 +133,13 @@ public class Engine implements Runnable{
             task.cancel(false);
             task = scheduler.scheduleAtFixedRate(this, 0, this.waitTime, TimeUnit.NANOSECONDS);
         }
+    }
+
+    public KeyType getKey() {
+        return keyPressed;
+    }
+
+    public String getCharacter() {
+        return charPressed;
     }
 }
