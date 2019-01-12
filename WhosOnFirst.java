@@ -2,10 +2,10 @@ import java.util.HashMap;
 import java.util.Map;
 public class WhosOnFirst{
   private String Display;
-  private String[] Options1=new String[6];
+  private String[] Options=new String[6];
   private int Level=0;
-  //private [][
-  //private List
+  private String[] AllWords=new String[] {"YES"," OKAY", "WHAT"," MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT","YOU'RE","NEXT","U","UR","HOLD","DONE", "UH UH","WHAT?","UH HUH","YOU","LIKE","SURE", "YOU ARE","YOUR"};
+
   public String getDisplay(){
     return this.Display;
   }
@@ -45,5 +45,7 @@ public class WhosOnFirst{
         map.put("HOLD", new String[] {"YOU ARE","U","DONE", "UH UH","YOU","UR","SURE","WHAT?", "YOU'RE","NEXT","HOLD","UH HUH","YOUR", "LIKE"});
         map.put("SURE", new String[] {"YOU ARE","DONE","LIKE", "YOU'RE","YOU","HOLD","UH HUH","UR","SURE","U","WHAT?","NEXT","YOUR", "UH UH"});
         map.put("LIKE", new String[] {"YOU'RE","NEXT","U","UR","HOLD","DONE", "UH UH","WHAT?","UH HUH","YOU","LIKE","SURE", "YOU ARE","YOUR"});
+        Level=0
   }
+
 }
