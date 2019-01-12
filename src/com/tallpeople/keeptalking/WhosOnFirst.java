@@ -3,6 +3,7 @@ package com.tallpeople.keeptalking;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.tallpeople.keeptalking.Module;
 
@@ -104,7 +105,7 @@ public class WhosOnFirst extends Module {
     }
     Answer=correctSequence[lowscore];
   }
-  public boolean userAnswer(){
+  public boolean userAnswer(TerminalScreen screen){
     if (Answer==input){
       level++;
       return true;
@@ -112,6 +113,21 @@ public class WhosOnFirst extends Module {
     else{
       level=0;
       strike++;
+        generatePuzzle();
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(44,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,36+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,28+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,20+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,12+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,4+YOFFSET),new TerminalSize(3,3),'#');
+        this.Correct();
       return false;
     }
   }
@@ -138,7 +154,6 @@ public class WhosOnFirst extends Module {
     textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,12+YOFFSET),new TerminalSize(3,3),'#');
     textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,4+YOFFSET),new TerminalSize(3,3),'#');
     this.Correct();
-    String input;
   }
     public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
         TextGraphics textGraphics = screen.newTextGraphics();
@@ -180,7 +195,9 @@ public class WhosOnFirst extends Module {
         if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=36+YOFFSET&&cursorPos.getColumn()<=42+YOFFSET) {
             input = options[5];
         }
-        //if (engine.get!this.userAnswer()){
+        if (engine.getKey().equals(KeyType.Enter)!){
+            this.userAnswer(screen)
+        }
           //  initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos);
         //}
   }
