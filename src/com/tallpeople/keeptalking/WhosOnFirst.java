@@ -2,6 +2,8 @@ package com.tallpeople.keeptalking;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -106,8 +108,22 @@ public class WhosOnFirst extends Module {
     Answer=correctSequence[lowscore];
   }
   public boolean userAnswer(TerminalScreen screen){
-    if (Answer==input){
+    if (Answer.equals(input)){
       level++;
+        generatePuzzle();
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(44,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,36+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,28+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,20+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,12+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,4+YOFFSET),new TerminalSize(3,3),'#');
       return true;
     }
     else{
@@ -176,29 +192,46 @@ public class WhosOnFirst extends Module {
         textGraphics.putString(33,21,options[3]);
         textGraphics.putString(33, 30,options[4]);
         textGraphics.putString(33, 39,options[5]);
-        //this.isDone();
-        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=18+YOFFSET&&cursorPos.getColumn()<=24+YOFFSET) {
-            input = options[0];
+        if (!this.isDone()) {
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 18 + YOFFSET && cursorPos.getColumn() <= 24 + YOFFSET) {
+                input = options[0];
+            }
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 27 + YOFFSET && cursorPos.getColumn() <= 33 + YOFFSET) {
+                input = options[1];
+            }
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 36 + YOFFSET && cursorPos.getColumn() <= 42 + YOFFSET) {
+                input = options[2];
+            }
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 18 + YOFFSET && cursorPos.getColumn() <= 24 + YOFFSET) {
+                input = options[3];
+            }
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 27 + YOFFSET && cursorPos.getColumn() <= 33 + YOFFSET) {
+                input = options[4];
+            }
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 36 + YOFFSET && cursorPos.getColumn() <= 42 + YOFFSET) {
+                input = options[5];
+            }
+            if ((KeyType.Enter).equals(engine.getKey())) {
+                this.userAnswer(screen);
+                //System.out.println(this.userAnswer(screen));
+                //System.out.println(Answer);
+            }
+            //System.out.println(level);
+            if(level==1){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level==2){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level==3){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level==4){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level==5){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
         }
-        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=27+YOFFSET&&cursorPos.getColumn()<=33+YOFFSET) {
-            input = options[1];
-        }
-        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=36+YOFFSET&&cursorPos.getColumn()<=42+YOFFSET) {
-            input = options[2];
-        }
-        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=18+YOFFSET&&cursorPos.getColumn()<=24+YOFFSET) {
-            input = options[3];
-        }
-        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=27+YOFFSET&&cursorPos.getColumn()<=33+YOFFSET) {
-            input = options[4];
-        }
-        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=36+YOFFSET&&cursorPos.getColumn()<=42+YOFFSET) {
-            input = options[5];
-        }
-        if (engine.getKey().equals(KeyType.Enter)!){
-            this.userAnswer(screen)
-        }
-          //  initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos);
-        //}
   }
 }

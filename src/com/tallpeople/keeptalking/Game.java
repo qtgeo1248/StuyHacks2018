@@ -1,12 +1,11 @@
 package com.tallpeople.keeptalking;
 
 import com.googlecode.lanterna.TerminalPosition;
-<<<<<<< HEAD
-=======
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
->>>>>>> master
+
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
@@ -31,23 +30,23 @@ public class Game implements IGame{
     }
 
     public void initialize(Engine engine, TerminalScreen screen) {
-<<<<<<< HEAD
+
         viewManager.getCurrentModules()[1].initialize(engine, screen, new TerminalPosition(1,1));
-=======
+
         drawUI(engine, screen, true);
->>>>>>> master
+
     }
 
     public void update(Engine engine, TerminalScreen screen) {
         screen.clear();
-<<<<<<< HEAD
+
 
         viewManager.getCurrentModules()[1].run(engine, screen, new TerminalPosition(1,1));
 
         //TextGraphics text = screen.newTextGraphics();
         //text.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
         screen.setCursorPosition(null);
-=======
+
         drawUI(engine, screen, false);
 
         //System.out.println(engine.getCharacter());
@@ -87,6 +86,6 @@ public class Game implements IGame{
                 }
             }
         }
->>>>>>> master
+
     }
 }
