@@ -1,8 +1,16 @@
+package com.tallpeople.keeptalking;
+
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.tallpeople.keeptalking.Module;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
 import java.util.ArrayList;
-public class WhosOnFirst extends Module{
+public class WhosOnFirst extends Module {
   private String display;
   private String[] options=new String[6];
   private int level=0;
@@ -109,22 +117,23 @@ public class WhosOnFirst extends Module{
     if (level==5){
       return true;
     }
+    return false;
   }
-  public static void drawDisplay(){
-    TextGraphics.drawRectangle(new TerminalPosition(5+XOFFSET,9+YOFFSET),new TerminalSize(44,9),'#');
+  public void drawDisplay(){
+      TextGraphics textGraphics = screen.newTextGraphics();
+    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(44,9),'#');
   }
-  WhosOnFirst puzzle=new WhosOnFirst();
   public void initialize(Engine engine, TerminalScreen screen){
-    puzzle.generatePuzzle();
-    drawPuzzle();
-    TextGraphics.drawRectangle(new TerminalPosition(17+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
-    TextGraphics.drawRectangle(new TerminalPosition(28+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
-    TextGraphics.drawRectangle(new TerminalPosition(39+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
-    TextGraphics.drawRectangle(new TerminalPosition(17+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
-    TextGraphics.drawRectangle(new TerminalPosition(28+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
-    TextGraphics.drawRectangle(new TerminalPosition(39+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
+    generatePuzzle();
+    TextGraphics textGraphics = screen.newTextGraphics();
+    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
   }
-  public void run(Engine engine, Terminal Screen){
+  public void run(Engine engine, TerminalScreen Screen){
 
   }
 

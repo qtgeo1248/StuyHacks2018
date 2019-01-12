@@ -1,7 +1,5 @@
 package com.tallpeople.keeptalking;
 
-import javax.swing.text.View;
-
 public class ViewManager {
 
     public final int SIDES = 6;
