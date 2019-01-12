@@ -74,7 +74,7 @@ public class KeyPad extends Module {
     }
     public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
         TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
+        //textGraphics.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
         //System.out.println(new TerminalPosition(XOFFSET + 10, YOFFSET + 10).toString());
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 10), new TerminalSize(15, 15), new TextCharacter(key1).withForegroundColor(TextColor.ANSI.BLACK));
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 29, YOFFSET + 10), new TerminalSize(15, 15), new TextCharacter(key2).withForegroundColor(TextColor.ANSI.BLACK));
