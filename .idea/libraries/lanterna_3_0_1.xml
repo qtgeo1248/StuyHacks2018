@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lanterna-3.0.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lanterna/lanterna-3.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://mabe02.github.io/lanterna/apidocs/3.0/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
