@@ -65,14 +65,17 @@ public class KeyPad extends Module {
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 32), new TerminalSize(15, 15), new TextCharacter(key3).withForegroundColor(TextColor.ANSI.BLACK));
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 29, YOFFSET + 32), new TerminalSize(15, 15), new TextCharacter(key4).withForegroundColor(TextColor.ANSI.BLACK));
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 50, YOFFSET), new TerminalSize(4,4), new TextCharacter('*').withForegroundColor(TextColor.ANSI.BLACK));
-        screen.setCharacter(17, 17, new TextCharacter(key1).withForegroundColor(TextColor.ANSI.BLACK));
+        screen.setCharacter(XOFFSET + 17, YOFFSET + 17, new TextCharacter(key1).withForegroundColor(TextColor.ANSI.BLACK));
+        screen.setCharacter(XOFFSET + 36, YOFFSET + 17, new TextCharacter(key2).withForegroundColor(TextColor.ANSI.BLACK));
+        screen.setCharacter(XOFFSET + 17, YOFFSET + 39, new TextCharacter(key3).withForegroundColor(TextColor.ANSI.BLACK));
+        screen.setCharacter(XOFFSET + 36, YOFFSET + 39, new TextCharacter(key4).withForegroundColor(TextColor.ANSI.BLACK));
         if (presses == 4) {
             textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
         } else {
-            if (engine.getKey() != null) {
-                if (engine.getKey() == KeyType.valueOf("Enter")) {
-                    textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
-                }
+            System.out.println(engine.getKey());
+            if (KeyType.ArrowUp.equals(engine.getKey())) {
+                System.out.println("oooof");
+                presses = 4;
             }
         }
     }
