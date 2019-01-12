@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.tallpeople.keeptalking.Engine;
 import com.tallpeople.keeptalking.Module;
@@ -53,9 +54,9 @@ public class KeyPad extends Module {
         key4 = answer.get(Math.abs(gen.nextInt()) % 4);
         answer.remove(Character.valueOf(key4));
     }
-    public void initialize(Engine engine, TerminalScreen screen) {
+    public void initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
     }
-    public void run(Engine engine, TerminalScreen screen) {
+    public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
         //System.out.println(new TerminalPosition(XOFFSET + 10, YOFFSET + 10).toString());
@@ -64,10 +65,15 @@ public class KeyPad extends Module {
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 32), new TerminalSize(15, 15), new TextCharacter(key3).withForegroundColor(TextColor.ANSI.BLACK));
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 29, YOFFSET + 32), new TerminalSize(15, 15), new TextCharacter(key4).withForegroundColor(TextColor.ANSI.BLACK));
         textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 50, YOFFSET), new TerminalSize(4,4), new TextCharacter('*').withForegroundColor(TextColor.ANSI.BLACK));
+        screen.setCharacter(17, 17, new TextCharacter(key1).withForegroundColor(TextColor.ANSI.BLACK));
         if (presses == 4) {
             textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
         } else {
-            
+            if (engine.getKey() != null) {
+                if (engine.getKey() == KeyType.valueOf("Enter")) {
+                    textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                }
+            }
         }
     }
 
