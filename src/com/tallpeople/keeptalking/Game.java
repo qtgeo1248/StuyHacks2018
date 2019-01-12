@@ -1,9 +1,11 @@
 package com.tallpeople.keeptalking;
 
 import com.googlecode.lanterna.TerminalPosition;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
+
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
@@ -21,17 +23,30 @@ public class Game implements IGame{
 
         Module[] frontModules = new Module[3];
         //frontModules[1] = new Timer(XOffset);
+        frontModules[1] = new WhosOnFirst(1, 1);
 
         viewManager = new ViewManager(ViewManager.ViewType.FRONT);
         viewManager.setModules(ViewManager.ViewType.FRONT, frontModules);
     }
 
     public void initialize(Engine engine, TerminalScreen screen) {
+
+        viewManager.getCurrentModules()[1].initialize(engine, screen, new TerminalPosition(1,1));
+
         drawUI(engine, screen, true);
+
     }
 
     public void update(Engine engine, TerminalScreen screen) {
         screen.clear();
+
+
+        viewManager.getCurrentModules()[1].run(engine, screen, new TerminalPosition(1,1));
+
+        //TextGraphics text = screen.newTextGraphics();
+        //text.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
+        screen.setCursorPosition(null);
+
         drawUI(engine, screen, false);
 
         //System.out.println(engine.getCharacter());
@@ -70,5 +85,6 @@ public class Game implements IGame{
                 }
             }
         }
+
     }
 }
