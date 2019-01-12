@@ -50,7 +50,6 @@ public class Game implements IGame{
         cursorY = Math.max(0, Math.min(cursorY, screen.getTerminalSize().getRows() - 1));
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setCharacter(new TerminalPosition(cursorX, cursorY), new TextCharacter('⬛').withForegroundColor(TextColor.ANSI.RED));
-        //System.out.println("ddfs");
 
         screen.setCursorPosition(new TerminalPosition(0,0));
     }
