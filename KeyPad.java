@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.lang.Math;
 
 public class KeyPad {
 
@@ -19,6 +20,6 @@ public class KeyPad {
         key[4] = map5;
         key[5] = map6;
         Random gen = new Random();
-        
+        answer = key[Math.abs(gen.nextInt()) % 6];
     }
 }
