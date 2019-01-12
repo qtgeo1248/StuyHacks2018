@@ -28,7 +28,7 @@ public class WhosOnFirst extends Module {
   public int getLevel(){
     return this.level;
   }
-  public int getStrike(){
+  public int getStrikes(){
     return strike;
   }
   public WhosOnFirst(int XOFFSET, int YOFFSET){
@@ -113,28 +113,51 @@ public class WhosOnFirst extends Module {
       return false;
     }
   }
-  public boolean done(){
+  public boolean isDone(){
     if (level==5){
       return true;
     }
     return false;
   }
-  public void drawDisplay(){
-      TextGraphics textGraphics = screen.newTextGraphics();
-    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(44,9),'#');
-  }
-  public void initialize(Engine engine, TerminalScreen screen){
+
+  public void initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos){
     generatePuzzle();
     TextGraphics textGraphics = screen.newTextGraphics();
+    textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(44,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,18+YOFFSET),new TerminalSize(14,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,27+YOFFSET),new TerminalSize(14,9),'#');
     textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,36+YOFFSET),new TerminalSize(14,9),'#');
+    textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,36+YOFFSET),new TerminalSize(3,3),'#');
+    textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,28+YOFFSET),new TerminalSize(3,3),'#');
+    textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,20+YOFFSET),new TerminalSize(3,3),'#');
+    textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,12+YOFFSET),new TerminalSize(3,3),'#');
+    textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,4+YOFFSET),new TerminalSize(3,3),'#');
+    this.Correct();
   }
-  public void run(Engine engine, TerminalScreen Screen){
-
+    public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,5+YOFFSET),new TerminalSize(40,10),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,18+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,27+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(6+XOFFSET,36+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,18+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,27+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(27+XOFFSET,36+YOFFSET),new TerminalSize(16,6),'#');
+        textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,21+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,25+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,29+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,33+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,37+YOFFSET),new TerminalSize(3,3),'#');
+        textGraphics.putString(23,10,display);
+        textGraphics.putString(13, 21,options[0]);
+        textGraphics.putString(13, 30,options[1]);
+        textGraphics.putString(13, 39,options[2]);
+        textGraphics.putString(33,21,options[3]);
+        textGraphics.putString(33, 30,options[4]);
+        textGraphics.putString(33, 39,options[5]);
   }
 
   /*

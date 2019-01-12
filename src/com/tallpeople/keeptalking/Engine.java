@@ -41,7 +41,7 @@ public class Engine implements Runnable{
     public void initialize() throws IOException {
 
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
-        terminalFactory.setInitialTerminalSize(new TerminalSize(100, 40));
+        terminalFactory.setInitialTerminalSize(new TerminalSize(200, 54));
         //terminalFactory.setTerminalEmulatorTitle(title);
         terminalFactory.setTerminalEmulatorDeviceConfiguration(new TerminalEmulatorDeviceConfiguration().withCursorStyle(TerminalEmulatorDeviceConfiguration.CursorStyle.VERTICAL_BAR));
         terminalFactory.setMouseCaptureMode(MouseCaptureMode.CLICK_RELEASE_DRAG_MOVE);
@@ -64,7 +64,7 @@ public class Engine implements Runnable{
         System.out.println(screen.getClass().toString());
         screen.doResizeIfNecessary();
 
-        waitTime = NANOSECONDS_PER_SECOND/30;
+        waitTime = NANOSECONDS_PER_SECOND/10;
         running = true;
         previousNanoSeconds = System.nanoTime();
 
