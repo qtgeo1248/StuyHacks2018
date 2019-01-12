@@ -1,6 +1,7 @@
 package com.tallpeople.keeptalking;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.MouseCaptureMode;
@@ -87,6 +88,9 @@ public class Engine implements Runnable{
         previousNanoSeconds = System.nanoTime();
 
         screen.doResizeIfNecessary();
+
+        KeyStroke keystroke = screen.pollInput();
+
         game.update(this, screen);
         screen.refresh();
 

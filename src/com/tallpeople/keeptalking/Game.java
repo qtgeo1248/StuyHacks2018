@@ -8,6 +8,8 @@ public class Game implements IGame{
     public final int MODULE_WIDTH = 56;
     public final int MODULE_HEIGHT = 50;
 
+    int curs
+
     public final ViewManager viewManager;
 
     public Game() {
@@ -25,8 +27,11 @@ public class Game implements IGame{
 
     public void update(Engine engine, TerminalScreen screen) {
         screen.clear();
-        TextGraphics text = screen.newTextGraphics();
-        text.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
+        //TextGraphics text = screen.newTextGraphics();
+        //text.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
+        for (int i = 0; i < viewManager.getCurrentModules().length; i++) {
+
+        }
         screen.setCursorPosition(null);
     }
 }
