@@ -27,16 +27,34 @@ public class Game implements IGame{
     }
 
     public void initialize(Engine engine, TerminalScreen screen) {
-        drawUI(engine, screen);
+        drawUI(engine, screen, true);
     }
 
     public void update(Engine engine, TerminalScreen screen) {
         screen.clear();
-        drawUI(engine, screen);
-        screen.setCursorPosition(null);
+        drawUI(engine, screen, false);
+
+        //System.out.println(engine.getCharacter());
+
+        if ("w".equalsIgnoreCase(engine.getCharacter())) {
+            cursorY-=1;
+        } else if ("s".equalsIgnoreCase(engine.getCharacter())) {
+            cursorY+=1;
+        } else if ("a".equalsIgnoreCase(engine.getCharacter())) {
+            cursorX-=1;
+        } else if ("d".equalsIgnoreCase(engine.getCharacter())) {
+            cursorX+=1;
+        }
+
+        cursorX = Math.max(0, Math.min(cursorX, screen.getTerminalSize().getColumns() - 1));
+        cursorY = Math.max(0, Math.min(cursorY, screen.getTerminalSize().getRows() - 1));
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setCharacter(new TerminalPosition(cursorX, cursorY), new TextCharacter('⬛').withForegroundColor(TextColor.ANSI.RED));
+
+        screen.setCursorPosition(new TerminalPosition(0,0));
     }
 
-    public void drawUI(Engine engine, TerminalScreen screen) {
+    public void drawUI(Engine engine, TerminalScreen screen, boolean isInit) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.drawRectangle(new TerminalPosition(0,0), new TerminalSize(56, 50), new TextCharacter('#').withForegroundColor(TextColor.ANSI.YELLOW));
         textGraphics.drawRectangle(new TerminalPosition(56,0), new TerminalSize(56, 50), new TextCharacter('#').withForegroundColor(TextColor.ANSI.YELLOW));
@@ -45,7 +63,11 @@ public class Game implements IGame{
         for (int i = 0; i < viewManager.getCurrentModules().length; i++) {
             Module module = viewManager.getCurrentModules()[i];
             if (module != null) {
-                viewManager.getCurrentModules()[i].initialize(engine, screen, new TerminalPosition(cursorX, cursorY));
+                if (isInit) {
+                    viewManager.getCurrentModules()[i].initialize(engine, screen, new TerminalPosition(cursorX, cursorY));
+                } else {
+                    viewManager.getCurrentModules()[i].run(engine, screen, new TerminalPosition(cursorX, cursorY));
+                }
             }
         }
     }
