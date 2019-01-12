@@ -185,38 +185,38 @@ public class WhosOnFirst extends Module {
         textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,29+YOFFSET),new TerminalSize(3,3),'#');
         textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,33+YOFFSET),new TerminalSize(3,3),'#');
         textGraphics.drawRectangle(new TerminalPosition(48+XOFFSET,37+YOFFSET),new TerminalSize(3,3),'#');
-        textGraphics.putString(23,10,display);
-        textGraphics.putString(13, 21,options[0]);
-        textGraphics.putString(13, 30,options[1]);
-        textGraphics.putString(13, 39,options[2]);
-        textGraphics.putString(33,21,options[3]);
-        textGraphics.putString(33, 30,options[4]);
-        textGraphics.putString(33, 39,options[5]);
+        textGraphics.putString(XOFFSET + 23,YOFFSET + 10,display);
+        textGraphics.putString(XOFFSET + 13, YOFFSET + 21,options[0]);
+        textGraphics.putString(XOFFSET + 13, YOFFSET + 30,options[1]);
+        textGraphics.putString(XOFFSET + 13, YOFFSET + 39,options[2]);
+        textGraphics.putString(XOFFSET + 33,YOFFSET + 21,options[3]);
+        textGraphics.putString(XOFFSET + 33, YOFFSET + 30,options[4]);
+        textGraphics.putString(XOFFSET + 33, YOFFSET + 39,options[5]);
         if (!this.isDone()) {
-            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 18 + YOFFSET && cursorPos.getColumn() <= 24 + YOFFSET) {
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 18 + YOFFSET && cursorPos.getRow() <= 24 + YOFFSET) {
                 input = options[0];
             }
-            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 27 + YOFFSET && cursorPos.getColumn() <= 33 + YOFFSET) {
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 27 + YOFFSET && cursorPos.getRow() <= 33 + YOFFSET) {
                 input = options[1];
             }
-            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getColumn() >= 36 + YOFFSET && cursorPos.getColumn() <= 42 + YOFFSET) {
+            if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 36 + YOFFSET && cursorPos.getRow() <= 42 + YOFFSET) {
                 input = options[2];
             }
-            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 18 + YOFFSET && cursorPos.getColumn() <= 24 + YOFFSET) {
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 18 + YOFFSET && cursorPos.getRow() <= 24 + YOFFSET) {
                 input = options[3];
             }
-            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 27 + YOFFSET && cursorPos.getColumn() <= 33 + YOFFSET) {
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 27 + YOFFSET && cursorPos.getRow() <= 33 + YOFFSET) {
                 input = options[4];
             }
-            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getColumn() >= 36 + YOFFSET && cursorPos.getColumn() <= 42 + YOFFSET) {
+            if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 36 + YOFFSET && cursorPos.getRow() <= 42 + YOFFSET) {
                 input = options[5];
             }
             if ((KeyType.Enter).equals(engine.getKey())) {
                 this.userAnswer(screen);
-                System.out.println(this.userAnswer(screen));
-                System.out.println(Answer);
+                //System.out.println(this.userAnswer(screen));
+                //System.out.println(Answer);
             }
-            System.out.println(level);
+            //System.out.println(level);
             if(level==1){
                 textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
