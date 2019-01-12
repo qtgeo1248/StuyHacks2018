@@ -53,9 +53,9 @@ public class KeyPad extends Module {
         key4 = answer.get(Math.abs(gen.nextInt()) % 4);
         answer.remove(Character.valueOf(key4));
     }
-    public void initialize(Engine engine, TerminalScreen screen) {
+    public void initialize(Engine engine, TerminalScreen screen, TerminalPosition pos) {
     }
-    public void run(Engine engine, TerminalScreen screen) {
+    public void run(Engine engine, TerminalScreen screen, TerminalPosition pos) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
         //System.out.println(new TerminalPosition(XOFFSET + 10, YOFFSET + 10).toString());
