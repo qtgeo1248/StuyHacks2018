@@ -42,27 +42,37 @@ public class KeyPad extends Module {
         Random gen = new Random();
         char[] ans = key[Math.abs(gen.nextInt()) % 6];
         ArrayList<Character> answer = new ArrayList<Character>();
+        ArrayList<Character> actual = new ArrayList<Character>();
         for (int i = 0; i < ans.length; i++) {
             answer.add(ans[i]);
+            actual.add(' ');
         }
+        ans = new char[4];
         key1 = answer.get(Math.abs(gen.nextInt()) % 7);
+        actual.set(answer.indexOf(key1), key1);
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = actual.get(i);
+        }
         answer.remove(Character.valueOf(key1));
         key2 = answer.get(Math.abs(gen.nextInt()) % 6);
+        actual.set(answer.indexOf(key2), key2);
         answer.remove(Character.valueOf(key2));
         key3 = answer.get(Math.abs(gen.nextInt()) % 5);
+        actual.set(answer.indexOf(key3), key3);
         answer.remove(Character.valueOf(key3));
         key4 = answer.get(Math.abs(gen.nextInt()) % 4);
+        actual.set(answer.indexOf(key4), key4);
         answer.remove(Character.valueOf(key4));
+        for (int i = 0; i < actual.size(); i++) {
+            if (actual.get(i) == ' ') {
+                actual.remove(i);
+                i--;
+            }
+        }
     }
-<<<<<<< HEAD
     public void initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
     }
     public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
-=======
-    public void initialize(Engine engine, TerminalScreen screen, TerminalPosition pos) {
-    }
-    public void run(Engine engine, TerminalScreen screen, TerminalPosition pos) {
->>>>>>> master
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.putString(0,0 , screen.getTerminalSize().getColumns() + ", " + screen.getTerminalSize().getRows());
         //System.out.println(new TerminalPosition(XOFFSET + 10, YOFFSET + 10).toString());
@@ -78,10 +88,38 @@ public class KeyPad extends Module {
         if (presses == 4) {
             textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
         } else {
-            System.out.println(engine.getKey());
-            if (KeyType.ArrowUp.equals(engine.getKey())) {
-                System.out.println("oooof");
-                presses = 4;
+            if (KeyType.Enter.equals(engine.getKey())) {
+                int x = cursorPos.getColumn();
+                int y = cursorPos.getRow();
+                if (x > XOFFSET + 10 && x < XOFFSET + 24 && y > YOFFSET + 10 && y < YOFFSET + 24) {
+                    if (key1 == ans[presses]) {
+                        presses++;
+                    } else {
+                        strikes++;
+                        textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.RED));
+                    }
+                } if (x > XOFFSET + 29 && x < XOFFSET + 43 && y > YOFFSET + 10 && y < YOFFSET + 24) {
+                    if (key2 == ans[presses]) {
+                        presses++;
+                    } else {
+                        strikes++;
+                        textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.RED));
+                    }
+                } if (x > XOFFSET + 10 && x < XOFFSET + 24 && y > YOFFSET + 32 && y < YOFFSET + 46) {
+                    if (key3 == ans[presses]) {
+                        presses++;
+                    } else {
+                        strikes++;
+                        textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.RED));
+                    }
+                } if (x > XOFFSET + 29 && x < XOFFSET + 43 && y > YOFFSET + 32 && y < YOFFSET + 46) {
+                    if (key4 == ans[presses]) {
+                        presses++;
+                    } else {
+                        strikes++;
+                        textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 51, YOFFSET + 1), new TerminalSize(2, 2), new TextCharacter('#').withForegroundColor(TextColor.ANSI.RED));
+                    }
+                }
             }
         }
     }
@@ -91,6 +129,6 @@ public class KeyPad extends Module {
     }
 
     public boolean isDone() {
-        return true;
+        return presses == 4;
     }
 }
