@@ -18,6 +18,7 @@ public class WhosOnFirst extends Module {
   private String[] allWords2=new String[] {"YOU'RE","NEXT","U","UR","HOLD","DONE", "UH UH","WHAT?","UH HUH","YOU","LIKE","SURE", "YOU ARE","YOUR"};
   private String Answer;
   private int strike;
+  private String input;
   private HashMap<String, String[]> map = new HashMap<>();
   public String getDisplay(){
     return this.display;
@@ -31,6 +32,7 @@ public class WhosOnFirst extends Module {
   public int getStrikes(){
     return strike;
   }
+
   public WhosOnFirst(int XOFFSET, int YOFFSET){
         super(XOFFSET,YOFFSET);
         map.put("READY", new String[] {"YES"," OKAY", "WHAT","MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT"});
@@ -102,8 +104,8 @@ public class WhosOnFirst extends Module {
     }
     Answer=correctSequence[lowscore];
   }
-  public boolean userAnswer(String word){
-    if (Answer==word){
+  public boolean userAnswer(){
+    if (Answer==input){
       level++;
       return true;
     }
@@ -136,6 +138,7 @@ public class WhosOnFirst extends Module {
     textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,12+YOFFSET),new TerminalSize(3,3),'#');
     textGraphics.drawRectangle(new TerminalPosition(40+XOFFSET,4+YOFFSET),new TerminalSize(3,3),'#');
     this.Correct();
+    String input;
   }
     public void run(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
         TextGraphics textGraphics = screen.newTextGraphics();
@@ -158,14 +161,27 @@ public class WhosOnFirst extends Module {
         textGraphics.putString(33,21,options[3]);
         textGraphics.putString(33, 30,options[4]);
         textGraphics.putString(33, 39,options[5]);
+        //this.isDone();
+        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=18+YOFFSET&&cursorPos.getColumn()<=24+YOFFSET) {
+            input = options[0];
+        }
+        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=27+YOFFSET&&cursorPos.getColumn()<=33+YOFFSET) {
+            input = options[1];
+        }
+        if (cursorPos.getColumn()>=6+XOFFSET&&cursorPos.getColumn()<=22+XOFFSET&&cursorPos.getColumn()>=36+YOFFSET&&cursorPos.getColumn()<=42+YOFFSET) {
+            input = options[2];
+        }
+        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=18+YOFFSET&&cursorPos.getColumn()<=24+YOFFSET) {
+            input = options[3];
+        }
+        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=27+YOFFSET&&cursorPos.getColumn()<=33+YOFFSET) {
+            input = options[4];
+        }
+        if (cursorPos.getColumn()>=27+XOFFSET&&cursorPos.getColumn()<=43+XOFFSET&&cursorPos.getColumn()>=36+YOFFSET&&cursorPos.getColumn()<=42+YOFFSET) {
+            input = options[5];
+        }
+        //if (engine.get!this.userAnswer()){
+          //  initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos);
+        //}
   }
-
-  /*
-  Constructor-WhosonFirst
-  generatePuzzle
-  Correct
-  ----
-  userAnwer
-  done
-  */
 }
