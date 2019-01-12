@@ -213,10 +213,10 @@ public class WhosOnFirst extends Module {
             }
             if ((KeyType.Enter).equals(engine.getKey())) {
                 this.userAnswer(screen);
-                //System.out.println(this.userAnswer(screen));
-                //System.out.println(Answer);
+                System.out.println(this.userAnswer(screen));
+                System.out.println(Answer);
             }
-            //System.out.println(level);
+            System.out.println(level);
             if(level==1){
                 textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
