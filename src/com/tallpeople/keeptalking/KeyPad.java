@@ -47,8 +47,11 @@ public class KeyPad extends Module {
     }
     public void initialize(Engine engine, TerminalScreen screen) {
         TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 10), new TerminalSize(10, 10), '*');
-
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 10), new TerminalSize(10, 10), key1);
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 44, YOFFSET + 10), new TerminalSize(10, 10), key2);
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 37), new TerminalSize(10, 10), key3);
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 44, YOFFSET + 37), new TerminalSize(10, 10), key4);
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 50, YOFFSET), new TerminalSize(4,4), '*');
     }
     public void run(Engine engine, TerminalScreen screen) {
 
