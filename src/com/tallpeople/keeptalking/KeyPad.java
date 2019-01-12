@@ -3,12 +3,13 @@ import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class KeyPad {
+public class KeyPad extends Module{
 
     Character[] ans;
     char key1, key2, key3, key4;
 
-    public KeyPad() {
+    public KeyPad(int xOffset, int yOffset, Engine engine, TerminalScreen screen) {
+        super(xOffset, yOffset, engine, screen);
         char[][] key = new char[6][7];
         char[] map1 = {'Ϙ', 'Ѧ', 'ƛ', 'Ϟ', 'Ѭ', 'ϗ', 'Ͽ'};
         char[] map2 = {'Ӭ', 'Ϙ', 'Ͽ', 'Ҩ', '☆', 'ϗ', '¿'};
@@ -37,6 +38,8 @@ public class KeyPad {
         key4 = answer.get(Math.abs(gen.nextInt()) % 4);
         answer.remove(Character.valueOf(key4));
     }
+
+    public String toString =
     public static void main(String[] args) {
         KeyPad abc = new KeyPad();
         System.out.println(abc.key1);
