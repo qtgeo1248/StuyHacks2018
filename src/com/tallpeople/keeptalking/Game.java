@@ -5,7 +5,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
+
+import java.io.IOException;
 
 public class Game implements IGame{
 
@@ -20,7 +23,8 @@ public class Game implements IGame{
     public Game() {
 
         Module[] frontModules = new Module[3];
-        //frontModules[1] = new Timer(XOffset);
+        int index = 1;
+        frontModules[index] = new Timer((index * MODULE_WIDTH + 1), 1);
 
         viewManager = new ViewManager(ViewManager.ViewType.FRONT);
         viewManager.setModules(ViewManager.ViewType.FRONT, frontModules);
@@ -44,6 +48,15 @@ public class Game implements IGame{
             cursorX-=1;
         } else if ("d".equalsIgnoreCase(engine.getCharacter())) {
             cursorX+=1;
+        }
+
+        if (KeyType.Enter.equals(engine.getKey())) {
+            try {
+                screen.getTerminal().bell();
+            }
+            catch (IOException e) {
+                System.err.println(e);
+            }
         }
 
         cursorX = Math.max(0, Math.min(cursorX, screen.getTerminalSize().getColumns() - 1));
