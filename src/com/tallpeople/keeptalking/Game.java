@@ -23,9 +23,9 @@ public class Game implements IGame{
     public Game() {
 
         Module[] frontModules = new Module[3];
-        frontModules[0] = new WhosOnFirst(1, 1);
-        frontModules[2] = new Timer(MODULE_WIDTH + 2, 1);
-        frontModules[1] = new KeyPad(MODULE_WIDTH * 1 + 1, 1);
+        frontModules[2] = new WhosOnFirst(MODULE_WIDTH * 2 + 1, 1);
+        frontModules[1] = new Timer(MODULE_WIDTH + 1, 1);
+        frontModules[0] = new KeyPad(1, 1);
 
         viewManager = new ViewManager(ViewManager.ViewType.FRONT);
         viewManager.setModules(ViewManager.ViewType.FRONT, frontModules);
