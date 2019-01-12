@@ -1,14 +1,22 @@
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.tallpeople.keeptalking.Engine;
+import com.tallpeople.keeptalking.Module;
+
 import java.util.Random;
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class KeyPad {
+public class KeyPad extends Module {
 
     Character[] ans;
     char key1, key2, key3, key4;
 
-    public KeyPad() {
+    public KeyPad(int xOffset, int yOffset) {
+        super(xOffset, yOffset);
         char[][] key = new char[6][7];
         char[] map1 = {'Ϙ', 'Ѧ', 'ƛ', 'Ϟ', 'Ѭ', 'ϗ', 'Ͽ'};
         char[] map2 = {'Ӭ', 'Ϙ', 'Ͽ', 'Ҩ', '☆', 'ϗ', '¿'};
@@ -37,11 +45,15 @@ public class KeyPad {
         key4 = answer.get(Math.abs(gen.nextInt()) % 4);
         answer.remove(Character.valueOf(key4));
     }
+    public void initialize(Engine engine, TerminalScreen screen) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.drawRectangle(new TerminalPosition(XOFFSET + 10, YOFFSET + 10), new TerminalSize(10, 10), '*');
+
+    }
+    public void run(Engine engine, TerminalScreen screen) {
+
+    }
+
     public static void main(String[] args) {
-        KeyPad abc = new KeyPad();
-        System.out.println(abc.key1);
-        System.out.println(abc.key2);
-        System.out.println(abc.key3);
-        System.out.println(abc.key4);
     }
 }
