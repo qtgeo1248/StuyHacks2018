@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
 import java.util.ArrayList;
-public class WhosOnFirst{
+public class WhosOnFirst extends Module{
   private String display;
   private String[] options=new String[6];
   private int level=0;
@@ -23,7 +23,8 @@ public class WhosOnFirst{
   public int getStrike(){
     return strike;
   }
-  public WhosOnFirst(){
+  public WhosOnFirst(int XOFFSET, int YOFFSET){
+        super(XOFFSET,YOFFSET);
         map.put("READY", new String[] {"YES"," OKAY", "WHAT","MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT"});
         map.put("FIRST", new String[] {"LEFT"," OKAY", "YES", "MIDDLE", "NO", "RIGHT","NOTHING", "UHHH", "WAIT", "READY", "BLANK", "WHAT", "PRESS", "FIRST"});
         map.put("NO", new String[] {"BLANK", "UHHH", "WAIT", "FIRST", "WHAT", "READY", "RIGHT", "YES", "NOTHING", "LEFT", "PRESS", "OKAY", "NO", "MIDDLE"});
@@ -108,6 +109,23 @@ public class WhosOnFirst{
     if (level==5){
       return true;
     }
+  }
+  public static void drawDisplay(){
+    TextGraphics.drawRectangle(new TerminalPosition(5+XOFFSET,9+YOFFSET),new TerminalSize(44,9),'#');
+  }
+  WhosOnFirst puzzle=new WhosOnFirst();
+  public void initialize(Engine engine, TerminalScreen screen){
+    puzzle.generatePuzzle();
+    drawPuzzle();
+    TextGraphics.drawRectangle(new TerminalPosition(17+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
+    TextGraphics.drawRectangle(new TerminalPosition(28+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
+    TextGraphics.drawRectangle(new TerminalPosition(39+XOFFSET,9+YOFFSET),new TerminalSize(14,9),'#');
+    TextGraphics.drawRectangle(new TerminalPosition(17+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
+    TextGraphics.drawRectangle(new TerminalPosition(28+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
+    TextGraphics.drawRectangle(new TerminalPosition(39+XOFFSET,39+YOFFSET),new TerminalSize(14,9),'#');
+  }
+  public void run(Engine engine, Terminal Screen){
+
   }
 
   /*
