@@ -70,7 +70,7 @@ public class Engine implements Runnable{
         System.out.println(screen.getClass().toString());
         screen.doResizeIfNecessary();
 
-        waitTime = NANOSECONDS_PER_SECOND/30;
+        waitTime = NANOSECONDS_PER_SECOND/10;
         running = true;
         previousNanoSeconds = System.nanoTime();
 
@@ -94,22 +94,31 @@ public class Engine implements Runnable{
 
         screen.doResizeIfNecessary();
 
-        KeyStroke keyStroke = null;
-        while((keyStroke = screen.pollInput()) != null) {
-            //KeyStroke keyStroke = screen.pollInput();
-            if (keyStroke == null) {
-                if (keyStroke.getKeyType() == KeyType.Character) {
-                    keyPressed = null;
-                    charPressed = keyStroke.getCharacter().toString();
-                } else {
-                    charPressed = null;
-                    keyPressed = keyStroke.getKeyType();
-                }
-            } else {
+        KeyStroke keyStroke = screen.pollInput();
+
+        if (keyStroke != null) {
+            if (keyStroke.getKeyType() == KeyType.Character) {
                 keyPressed = null;
+                charPressed = keyStroke.getCharacter().toString();
+            } else {
                 charPressed = null;
+                keyPressed = keyStroke.getKeyType();
+            }
+        } else {
+            keyPressed = null;
+            charPressed = null;
+        }
+
+        while((keyStroke = screen.pollInput()) != null) {
+            if (keyStroke.getKeyType() == KeyType.Character) {
+                keyPressed = null;
+                charPressed = keyStroke.getCharacter().toString();
+            } else {
+                charPressed = null;
+                keyPressed = keyStroke.getKeyType();
             }
         }
+        //System.out.println(charPressed);
         game.update(this, screen);
         screen.refresh();
 
