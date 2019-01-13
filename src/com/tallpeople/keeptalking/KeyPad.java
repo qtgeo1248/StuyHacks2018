@@ -40,19 +40,17 @@ public class KeyPad extends Module {
         key[4] = map5;
         key[5] = map6;
         Random gen = new Random();
-        char[] ans = key[Math.abs(gen.nextInt()) % 6];
+        char[] ans2 = key[Math.abs(gen.nextInt()) % 6];
         ArrayList<Character> answer = new ArrayList<Character>();
         ArrayList<Character> actual = new ArrayList<Character>();
-        for (int i = 0; i < ans.length; i++) {
-            answer.add(ans[i]);
+        for (int i = 0; i < ans2.length; i++) {
+            answer.add(ans2[i]);
             actual.add(' ');
         }
-        ans = new char[4];
+        //ans = new char[4];
+        ans = new Character[4];
         key1 = answer.get(Math.abs(gen.nextInt()) % 7);
         actual.set(answer.indexOf(key1), key1);
-        for (int i = 0; i < ans.length; i++) {
-            ans[i] = actual.get(i);
-        }
         answer.remove(Character.valueOf(key1));
         key2 = answer.get(Math.abs(gen.nextInt()) % 6);
         actual.set(answer.indexOf(key2), key2);
@@ -69,6 +67,10 @@ public class KeyPad extends Module {
                 i--;
             }
         }
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = actual.get(i);
+        }
+        System.out.println(ans);
     }
     public void initialize(Engine engine, TerminalScreen screen, TerminalPosition cursorPos) {
     }

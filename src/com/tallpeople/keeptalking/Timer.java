@@ -10,9 +10,11 @@ import org.w3c.dom.Text;
 
 public class Timer extends Module {
 
-    private double timeLeft = 10;
+    private double timeLeft = 150;
 
     private int strikes = 0;
+
+    boolean win = false;
 
     public Timer(int XOFFSET, int YOFFSET) {
         super(XOFFSET, YOFFSET);
@@ -34,7 +36,9 @@ public class Timer extends Module {
         textGraphics.setForegroundColor(TextColor.ANSI.RED);
         textGraphics.putString(new TerminalPosition(24 + XOFFSET, 30 + YOFFSET), String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
 
-        if (timeLeft <= 0) {
+        if (win) {
+            textGraphics.putString(new TerminalPosition(22 + XOFFSET, 30 + YOFFSET), "BOMB DEFUSED!");
+        } else if (timeLeft <= 0) {
 
             textGraphics.putString(new TerminalPosition(22 + XOFFSET, 30 + YOFFSET), "GAME OVER!");
         }
@@ -54,5 +58,9 @@ public class Timer extends Module {
 
     public void setStrikes(int strikes) {
         this.strikes = strikes;
+    }
+
+    public void win() {
+        win = true;
     }
 }

@@ -106,6 +106,7 @@ public class WhosOnFirst extends Module {
       }
     }
     Answer=correctSequence[lowscore];
+    //System.out.println(Answer);
   }
   public boolean userAnswer(TerminalScreen screen){
     if (Answer.equals(input)){
@@ -192,6 +193,8 @@ public class WhosOnFirst extends Module {
         textGraphics.putString(XOFFSET + 33,YOFFSET + 21,options[3]);
         textGraphics.putString(XOFFSET + 33, YOFFSET + 30,options[4]);
         textGraphics.putString(XOFFSET + 33, YOFFSET + 39,options[5]);
+        this.Correct();
+
         if (!this.isDone()) {
             if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 18 + YOFFSET && cursorPos.getRow() <= 24 + YOFFSET) {
                 input = options[0];
@@ -211,27 +214,85 @@ public class WhosOnFirst extends Module {
             if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 36 + YOFFSET && cursorPos.getRow() <= 42 + YOFFSET) {
                 input = options[5];
             }
-            if ((KeyType.Enter).equals(engine.getKey())) {
+            if ((KeyType.Enter).equals(engine.getKey()) && inBounds(cursorPos)) {
                 this.userAnswer(screen);
                 //System.out.println(this.userAnswer(screen));
                 //System.out.println(Answer);
             }
             //System.out.println(level);
-            if(level==1){
+            /*if(level>=1){
                 textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level>=2){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level>=3){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level>=4){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }
+            if(level>=5){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            }*/
+
+            //System.out.println(level);
+
+            if(level==1){
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
             if(level==2){
-                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 34), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
             if(level==3){
-                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 34), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 30), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
             if(level==4){
-                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 34), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 30), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 26), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
             if(level==5){
-                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 42-4*level), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 34), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 30), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 26), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+                textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 22), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
             }
+
+        } else {
+            textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 38), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 34), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 30), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 26), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+            textGraphics.fillRectangle(new TerminalPosition(XOFFSET + 49, YOFFSET + 22), new TerminalSize(1, 1), new TextCharacter('#').withForegroundColor(TextColor.ANSI.GREEN));
+
         }
+  }
+
+  boolean inBounds(TerminalPosition cursorPos) {
+      if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 18 + YOFFSET && cursorPos.getRow() <= 24 + YOFFSET) {
+          return true;
+      }
+      if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 27 + YOFFSET && cursorPos.getRow() <= 33 + YOFFSET) {
+          return true;
+      }
+      if (cursorPos.getColumn() >= 6 + XOFFSET && cursorPos.getColumn() <= 22 + XOFFSET && cursorPos.getRow() >= 36 + YOFFSET && cursorPos.getRow() <= 42 + YOFFSET) {
+          return true;
+      }
+      if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 18 + YOFFSET && cursorPos.getRow() <= 24 + YOFFSET) {
+          return true;
+      }
+      if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 27 + YOFFSET && cursorPos.getRow() <= 33 + YOFFSET) {
+          return true;
+      }
+      if (cursorPos.getColumn() >= 27 + XOFFSET && cursorPos.getColumn() <= 43 + XOFFSET && cursorPos.getRow() >= 36 + YOFFSET && cursorPos.getRow() <= 42 + YOFFSET) {
+          return true;
+      }
+      return false;
   }
 }

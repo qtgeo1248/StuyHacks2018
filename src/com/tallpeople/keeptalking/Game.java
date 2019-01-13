@@ -57,6 +57,10 @@ public class Game implements IGame{
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setCharacter(new TerminalPosition(cursorX, cursorY), new TextCharacter('⬛').withForegroundColor(TextColor.ANSI.RED));
 
+        if (viewManager.getCurrentModules()[2].isDone() || viewManager.getCurrentModules()[0].isDone()) {
+            ((Timer)viewManager.getCurrentModules()[1]).win();
+        }
+
         screen.setCursorPosition(new TerminalPosition(0,0));
     }
 
